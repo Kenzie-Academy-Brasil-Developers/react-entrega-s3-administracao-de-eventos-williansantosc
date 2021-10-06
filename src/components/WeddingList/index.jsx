@@ -1,0 +1,30 @@
+import Button from "../Button";
+import { Card } from "./styles";
+import { WeddingContext } from "../../providers/wedding";
+import { useContext } from "react";
+
+function WeddingList({ product }) {
+  const { removeFromWeddingList } = useContext(WeddingContext);
+
+  const {
+    id,
+    name,
+    first_brewed,
+    description,
+    image_url,
+    volume: { value },
+  } = product;
+
+  return (
+    <Card>
+      <h3>{`${name.slice(0, 7)}...`}</h3>
+      <img src={image_url} alt={name} />
+      <p>{`${description.slice(0, 58)}...`}</p>
+      <p>{first_brewed}</p>
+      <p>{value} litros</p>
+      <Button onClick={() => removeFromWeddingList(id)}>Remover Bebida</Button>
+    </Card>
+  );
+}
+
+export default WeddingList;
